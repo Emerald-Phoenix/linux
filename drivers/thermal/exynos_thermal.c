@@ -1590,7 +1590,7 @@ static struct exynos_tmu_platform_data const exynos5_tmu_data = {
 	.cal_type = TYPE_ONE_POINT_TRIMMING,
 	.efuse_value = 55,
 	.freq_tab[0] = {
-		.freq_clip_max = 900 * 1000,
+		.freq_clip_max = 1900 * 1000,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
 		.freq_clip_max_kfc = 1500 * 1000,
 #endif
@@ -1601,9 +1601,9 @@ static struct exynos_tmu_platform_data const exynos5_tmu_data = {
 #endif
 	},
 	.freq_tab[1] = {
-		.freq_clip_max = 200 * 1000,
+		.freq_clip_max = 1200 * 1000,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
-		.freq_clip_max_kfc = 1200 * 1000,
+		.freq_clip_max_kfc = 1500 * 1000,
 #endif
 		.temp_level = 95,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
@@ -1617,17 +1617,6 @@ static struct exynos_tmu_platform_data const exynos5_tmu_data = {
 		.freq_clip_max_kfc = 200 * 1000,
 #endif
 		.temp_level = 100,
-#ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
-		.mask_val = &mp_cluster_cpus[CA15],
-		.mask_val_kfc = &mp_cluster_cpus[CA7],
-#endif
-	},
-	.freq_tab[3] = {
-		.freq_clip_max = 200 * 1000,
-#ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
-		.freq_clip_max_kfc = 200 * 1000,
-#endif
-		.temp_level = 110,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
 		.mask_val = &mp_cluster_cpus[CA15],
 		.mask_val_kfc = &mp_cluster_cpus[CA7],
