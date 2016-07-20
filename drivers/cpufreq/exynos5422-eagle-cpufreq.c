@@ -551,7 +551,7 @@ static void __init set_volt_table_CA15(void)
 	if(exynos5422_tbl_ver_is_bin2())
 		max_support_idx_CA15 = L6; 
 	else
-		max_support_idx_CA15 = L4;
+		max_support_idx_CA15 = L3;
 		
 	min_support_idx_CA15 = L22;
 }
