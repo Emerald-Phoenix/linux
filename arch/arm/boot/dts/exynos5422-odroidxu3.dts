@@ -62,11 +62,10 @@
 		card-detect-delay = <200>;
 		qos_int_level = <222000>;
 		samsung,dw-mshc-ciu-div = <3>;
-		samsung,dw-mshc-sdr-timing = <3 0 4 0>;
-		samsung,dw-mshc-ddr-timing = <3 0 2 0>;
-		samsung,dw-mshc-hs200-timing = <3 0 2 0>;
-		samsung,dw-mshc-ddr200-timing = <1 1 2 0>;
-		samsung,dw-mshc-ddr200-delay-line = <150>;
+		samsung,dw-mshc-sdr-timing = <0 4 3>;
+		samsung,dw-mshc-ddr-timing = <0 2 3>;
+		samsung,dw-mshc-hs200-timing = <0 2 3>;
+		samsung,dw-mshc-ddr200-timing = <0 2 1>;
 		vmmc-supply = <&buck10_reg>;
 		vqmmc-supply = <&ldo18_reg>;
 		clk_pin = "gpc0-0";
