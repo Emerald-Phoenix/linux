@@ -409,7 +409,7 @@ static void __init set_volt_table_CA7(void)
 	if(exynos5422_tbl_ver_is_bin2())
 		max_support_idx_CA7 = L3;
 	else
-		max_support_idx_CA7 = L1;
+		max_support_idx_CA7 = L0;
 		
 	if (PKG_ID_DVFS_VERSION == 0x02)
 		min_support_idx_CA7 = L14;

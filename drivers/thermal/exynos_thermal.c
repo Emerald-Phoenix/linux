@@ -1593,7 +1593,7 @@ static struct exynos_tmu_platform_data const exynos5_tmu_data = {
 	.freq_tab[0] = {
 		.freq_clip_max = 2000 * 1000,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
-		.freq_clip_max_kfc = 1500 * 1000,
+		.freq_clip_max_kfc = 1600 * 1000,
 #endif
 		.temp_level = 85,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
@@ -1604,7 +1604,7 @@ static struct exynos_tmu_platform_data const exynos5_tmu_data = {
 	.freq_tab[1] = {
 		.freq_clip_max = 1900 * 1000,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
-		.freq_clip_max_kfc = 1500 * 1000,
+		.freq_clip_max_kfc = 1600 * 1000,
 #endif
 		.temp_level = 90,
 #ifdef CONFIG_ARM_EXYNOS_MP_CPUFREQ
