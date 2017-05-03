@@ -350,13 +350,13 @@ static int exynos5422_bus_table_CA15[CPUFREQ_LEVEL_END_CA15] = {
 	633000, /* 1.1 GHz */
 	543000, /* 1.0 GHz */
 	543000, /* 900 MHz */
-	543000, /* 800 MHz */
-	543000, /* 700 MHz */
-	543000, /* 600 MHz */
-	543000, /* 500 MHz */
-	543000, /* 400 MHz */
-	543000, /* 300 MHz */
-	543000, /* 200 MHz */
+	413000, /* 800 MHz */
+	275000, /* 700 MHz */
+	138000, /* 600 MHz */
+	138000, /* 500 MHz */
+	138000, /* 400 MHz */
+	138000, /* 300 MHz */
+	138000, /* 200 MHz */
 };
 
 static void exynos5422_set_int_skew_CA15(int new_index)
