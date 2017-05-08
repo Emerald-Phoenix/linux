@@ -42,7 +42,7 @@
 
 #define KFC_DVFS_LEVEL_NR		(15)
 #define KFC_ASV_GRP_NR			(14)
-#define KFC_MAX_VOLT			(1300000)
+#define KFC_MAX_VOLT			(1337500)
 #define KFC_V300_BIN2_DVFS_LEVEL_NR	(12)
 #define KFC_V300_BIN2_MAX_VOLT		(1250000)
 
