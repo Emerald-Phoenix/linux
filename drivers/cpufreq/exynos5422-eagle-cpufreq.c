@@ -334,16 +334,16 @@ static const unsigned int asv_voltage_5422_CA15[CPUFREQ_LEVEL_END_CA15] = {
 
 /* Minimum memory throughput in megabytes per second */
 static int exynos5422_bus_table_CA15[CPUFREQ_LEVEL_END_CA15] = {
-	825000, /* 2.4 GHz */
-	825000, /* 2.3 GHz */
-	825000, /* 2.2 GHz */
-	825000, /* 2.1 GHz */
-	825000, /* 2.0 GHz */
-	825000, /* 1.9 GHz */
-	728000, /* 1.8 GHz */
-	728000, /* 1.7 MHz */
-	633000, /* 1.6 GHz */
-	633000, /* 1.5 GHz */
+	933000, /* 2.4 GHz */
+	933000, /* 2.3 GHz */
+	933000, /* 2.2 GHz */
+	933000, /* 2.1 GHz */
+	933000, /* 2.0 GHz */
+	933000, /* 1.9 GHz */
+	825000, /* 1.8 GHz */
+	825000, /* 1.7 MHz */
+	728000, /* 1.6 GHz */
+	728000, /* 1.5 GHz */
 	633000, /* 1.4 GHz */
 	633000, /* 1.3 GHz */
 	633000, /* 1.2 GHz */
@@ -352,11 +352,11 @@ static int exynos5422_bus_table_CA15[CPUFREQ_LEVEL_END_CA15] = {
 	543000, /* 900 MHz */
 	413000, /* 800 MHz */
 	275000, /* 700 MHz */
-	138000, /* 600 MHz */
-	138000, /* 500 MHz */
-	138000, /* 400 MHz */
-	138000, /* 300 MHz */
-	138000, /* 200 MHz */
+	165000, /* 600 MHz */
+	165000, /* 500 MHz */
+	165000, /* 400 MHz */
+	165000, /* 300 MHz */
+	165000, /* 200 MHz */
 };
 
 static void exynos5422_set_int_skew_CA15(int new_index)

@@ -195,7 +195,7 @@ static const unsigned int asv_voltage_5422_CA7[CPUFREQ_LEVEL_END_CA7] = {
 
 /* Minimum memory throughput in megabytes per second */
 static int exynos5422_bus_table_CA7[CPUFREQ_LEVEL_END_CA7] = {
-	825000, /* 1.6 GHz */
+	933000, /* 1.6 GHz */
 	825000, /* 1.5 GHz */
 	728000, /* 1.4 GHz */
 	633000, /* 1.3 GHz */
@@ -205,8 +205,8 @@ static int exynos5422_bus_table_CA7[CPUFREQ_LEVEL_END_CA7] = {
 	413000, /* 900 MHz */
 	413000, /* 800 MHz */
 	275000, /* 700 MHz */
-	138000, /* 600 MHz */
-	138000, /* 500 MHz */
+	165000, /* 600 MHz */
+	165000, /* 500 MHz */
 	0,  /* 400 MHz */
 	0,  /* 300 MHz */
 	0,  /* 200 MHz */
