@@ -189,6 +189,8 @@ static int xhci_plat_remove(struct platform_device *dev)
 	struct usb_hcd	*hcd = platform_get_drvdata(dev);
 	struct xhci_hcd	*xhci = hcd_to_xhci(hcd);
 
+	xhci->xhc_state |= XHCI_STATE_REMOVING;
+
 	phy_power_off(xhci->shared_hcd->phy);
 	phy_exit(xhci->shared_hcd->phy);
 	usb_remove_hcd(xhci->shared_hcd);
