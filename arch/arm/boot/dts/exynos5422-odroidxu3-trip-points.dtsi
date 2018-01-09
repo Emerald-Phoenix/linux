@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
- */
+ */			
 
 #define _TOKENPASTE(x, y) x ## y
 #define TOKENPASTE(x, y) _TOKENPASTE(x, y)
@@ -18,16 +18,14 @@
 			polling-delay = <1000>;
 			trips {
 				UNIQIFY(cpu_alert0): cpu-alert-0 {
-					temperature = <60000>; /* millicelsius */
-					hysteresis = <5000>; /* millicelsius */
-					type = "passive";
-					irq-mode;
-				};
-				UNIQIFY(cpu_alert1): cpu-alert-1 {
 					temperature = <70000>; /* millicelsius */
 					hysteresis = <5000>; /* millicelsius */
-					type = "passive";
-					irq-mode;
+					type = "active";
+				};
+				UNIQIFY(cpu_alert1): cpu-alert-1 {
+					temperature = <75000>; /* millicelsius */
+					hysteresis = <5000>; /* millicelsius */
+					type = "active";
 				};
 				UNIQIFY(cpu_alert2): cpu-alert-2 {
 					temperature = <80000>; /* millicelsius */
@@ -75,28 +73,22 @@
 					cooling-device = <&fan0 2 3>;
 				};
 				/*
-				 * When reaching cpu_alert3, reduce A15 cores by 4 steps (2.0GHz -> 1.6GHz).
+				 * When reaching cpu_alert3, reduce A15 cores by 1 step.
 				 * The 2GHz step causes high thermals on multithreaded workloads
 				 * so better performance is gained by managing it out early.
 				 */
 				map3 {
 					trip = <&UNIQIFY(cpu_alert3)>;
-					cooling-device = <&cpu4 0 4>,
-							 <&cpu5 0 4>,
-							 <&cpu6 0 4>,
-							 <&cpu7 0 4>;
+					cooling-device = <&cpu4 0 1>;
 				};
 				/*
-				* When reaching cpu_alert4, reduce A15 cores by 4 more steps (1.6GHz -> 1.2GHz)
+				* When reaching cpu_alert4, reduce A15 cores by 3 steps
 				* to further manage the performance level while keeping
 				* thermals under control.
 				*/
 				map4 {
 					trip = <&UNIQIFY(cpu_alert4)>;
-					cooling-device = <&cpu4 5 8>,
-							 <&cpu5 5 8>,
-							 <&cpu6 5 8>,
-							 <&cpu7 5 8>;
+					cooling-device = <&cpu4 2 4>;
 				};
 				/*
 				 * When reaching cpu_alert5, reduce all CPUs to ensure thermal
@@ -105,13 +97,10 @@
 				 */
 				map5 {
 					trip = <&UNIQIFY(cpu_alert5)>;
-					cooling-device = <&cpu0 0 4>,
-							 <&cpu1 0 4>,
-							 <&cpu2 0 4>,
-							 <&cpu3 0 4>,
-							 <&cpu4 9 12>,
-							 <&cpu5 9 12>,
-							 <&cpu6 9 12>,
-							 <&cpu7 9 12>;
+					cooling-device = <&cpu0 0 2>;
+				};
+				map6 {
+					trip = <&UNIQIFY(cpu_alert5)>;
+					cooling-device = <&cpu4 4 14>;
 				};
 			};
