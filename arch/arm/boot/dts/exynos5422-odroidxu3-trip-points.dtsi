@@ -8,7 +8,7 @@
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
  *
- */
+ */			
 
 #define _TOKENPASTE(x, y) x ## y
 #define TOKENPASTE(x, y) _TOKENPASTE(x, y)
@@ -18,12 +18,12 @@
 			polling-delay = <1000>;
 			trips {
 				UNIQIFY(cpu_alert0): cpu-alert-0 {
-					temperature = <60000>; /* millicelsius */
+					temperature = <70000>; /* millicelsius */
 					hysteresis = <10000>; /* millicelsius */
 					type = "active";
 				};
 				UNIQIFY(cpu_alert1): cpu-alert-1 {
-					temperature = <70000>; /* millicelsius */
+					temperature = <75000>; /* millicelsius */
 					hysteresis = <10000>; /* millicelsius */
 					type = "active";
 				};
@@ -67,22 +67,22 @@
 					cooling-device = <&fan0 2 3>;
 				};
 				/*
-				 * When reaching cpu_alert3, reduce A15 cores by 4 steps (2.0GHz -> 1.6GHz).
+				 * When reaching cpu_alert3, reduce A15 cores by 1 step.
 				 * The 2GHz step causes high thermals on multithreaded workloads
 				 * so better performance is gained by managing it out early.
 				 */
 				map3 {
 					trip = <&UNIQIFY(cpu_alert3)>;
-					cooling-device = <&cpu4 0 4>;
+					cooling-device = <&cpu4 0 1>;
 				};
 				/*
-				* When reaching cpu_alert4, reduce A15 cores by 4 steps (1.6GHz -> 1.2GHz)
+				* When reaching cpu_alert4, reduce A15 cores by 3 steps
 				* to further manage the performance level while keeping
 				* thermals under control.
 				*/
 				map4 {
 					trip = <&UNIQIFY(cpu_alert4)>;
-					cooling-device = <&cpu4 4 8>;
+					cooling-device = <&cpu4 2 4>;
 				};
 				/*
 				 * When reaching cpu_alert5, reduce all CPUs to ensure thermal
@@ -95,6 +95,6 @@
 				};
 				map6 {
 					trip = <&UNIQIFY(cpu_alert5)>;
-					cooling-device = <&cpu4 8 14>;
+					cooling-device = <&cpu4 4 14>;
 				};
 			};
