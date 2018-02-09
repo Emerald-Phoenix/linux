@@ -1223,6 +1223,15 @@ static int cpufreq_online(unsigned int cpu)
 	cpumask_and(policy->cpus, policy->cpus, cpu_online_mask);
 
 	if (new_policy) {
+
+		if (cpumask_test_cpu(0, policy->cpus)) {
+			policy->min = 200000;
+			policy->max = 1500000;
+		} else {
+			policy->min = 200000;
+			policy->max = 2000000;
+		}
+
 		policy->user_policy.min = policy->min;
 		policy->user_policy.max = policy->max;
 
