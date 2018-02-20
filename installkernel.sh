@@ -1,5 +1,5 @@
 echo Backing up previous kernel
-tar -cf - /lib/modules /media/boot | zstd -2 > /root/kernel-backup-`date +%H%M-%d%m%Y`.tar.zst
+tar -cf - /lib/modules /media/boot | zstd -2 > /root/kernel-backup-`date +%Y%m%d-%H%M`.tar.zst
 
 echo Deleting old kernel
 rm -fr /media/boot/exynos5422-odroidxu3.dtb /media/boot/exynos5422-odroidxu4.dtb /media/boot/meson8b_odroidc.dtb /media/boot/zImage* /media/boot/uImage* /media/boot/uInitrd* /lib/modules/*
