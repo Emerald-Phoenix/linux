@@ -31,6 +31,11 @@
 #include <linux/tick.h>
 #include <trace/events/power.h>
 
+#ifdef CONFIG_CPU_VOLTAGE_TABLE
+#include <linux/err.h>
+#include <linux/pm_opp.h>
+#endif //CONFIG_CPU_VOLTAGE_TABLE
+
 static LIST_HEAD(cpufreq_policy_list);
 
 static inline bool policy_is_inactive(struct cpufreq_policy *policy)
@@ -857,6 +862,81 @@ static ssize_t show_scaling_setspeed(struct cpufreq_policy *policy, char *buf)
 	return policy->governor->show_setspeed(policy, buf);
 }
 
+#ifdef CONFIG_CPU_VOLTAGE_TABLE
+#define CPU_VDD_MIN	 800000
+#define CPU_VDD_MAX	1400000
+
+static ssize_t store_voltage_table(struct cpufreq_policy *policy,
+					const char *buf, size_t count)
+{
+	int ret = 0;
+	unsigned long val;
+	char size_cur[8];
+	struct cpufreq_frequency_table *pos;
+	struct dev_pm_opp *opp;
+	struct device *dev;
+	unsigned int current_cpu;
+	
+	if (!buf)
+		return -EINVAL;
+	
+	cpufreq_for_each_entry(pos, policy->freq_table) {
+		ret = sscanf(buf, "%lu", &val);
+		if (!ret)
+			return -EINVAL;
+		
+		if (val < CPU_VDD_MIN || val > CPU_VDD_MAX)
+			return -EINVAL;
+		
+		for_each_cpu(current_cpu, policy->related_cpus) {
+			dev = get_cpu_device(current_cpu);
+			opp = dev_pm_opp_find_freq_exact(dev, pos->frequency * 1000, true);
+			if (IS_ERR(opp))
+				return -EIO;
+			
+			opp->supplies[0].u_volt_min = val;
+			opp->supplies[0].u_volt_max = val;
+			opp->supplies[0].u_volt = val;
+			
+			dev_pm_opp_put(opp);
+		}
+
+		ret = sscanf(buf, "%s", size_cur);
+		buf += strlen(size_cur) + 1;
+	}
+	
+	return count;
+}
+
+static ssize_t show_voltage_table(struct cpufreq_policy *policy, char *buf)
+{
+	int len = 0;
+	struct cpufreq_frequency_table *pos;
+	struct dev_pm_opp *opp;
+	struct device *dev;
+	
+	if (!buf)
+		return -EINVAL;
+	
+	dev = get_cpu_device(policy->cpu);
+
+	cpufreq_for_each_entry(pos, policy->freq_table) {
+		opp = dev_pm_opp_find_freq_exact(dev, pos->frequency * 1000, true);
+		if (IS_ERR(opp)) {
+			len += sprintf(buf + len, "%d MHz: <unknown> uV\n", pos->frequency / 1000);
+		} else {
+			len += sprintf(buf + len, "%d MHz: %lu uV\n", pos->frequency / 1000,
+					   dev_pm_opp_get_voltage(opp));
+			dev_pm_opp_put(opp);
+		}
+	}
+	
+	return len;
+}
+
+#endif // CONFIG_CPU_VOLTAGE_TABLE
+
+
 /**
  * show_bios_limit - show the current cpufreq HW/BIOS limitation
  */
@@ -886,6 +966,9 @@ cpufreq_freq_attr_rw(scaling_min_freq);
 cpufreq_freq_attr_rw(scaling_max_freq);
 cpufreq_freq_attr_rw(scaling_governor);
 cpufreq_freq_attr_rw(scaling_setspeed);
+#ifdef CONFIG_CPU_VOLTAGE_TABLE
+cpufreq_freq_attr_rw(voltage_table);
+#endif // CONFIG_CPU_VOLTAGE_TABLE
 
 static struct attribute *default_attrs[] = {
 	&cpuinfo_min_freq.attr,
@@ -899,6 +982,9 @@ static struct attribute *default_attrs[] = {
 	&scaling_driver.attr,
 	&scaling_available_governors.attr,
 	&scaling_setspeed.attr,
+#ifdef CONFIG_CPU_VOLTAGE_TABLE
+	&voltage_table.attr,
+#endif // CONFIG_CPU_VOLTAGE_TABLE
 	NULL
 };
 
