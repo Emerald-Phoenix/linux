@@ -47,51 +47,6 @@ extern struct list_head opp_tables;
  */
 
 /**
- * struct dev_pm_opp - Generic OPP description structure
- * @node:	opp table node. The nodes are maintained throughout the lifetime
- *		of boot. It is expected only an optimal set of OPPs are
- *		added to the library by the SoC framework.
- *		IMPORTANT: the opp nodes should be maintained in increasing
- *		order.
- * @kref:	for reference count of the OPP.
- * @available:	true/false - marks if this OPP as available or not
- * @dynamic:	not-created from static DT entries.
- * @turbo:	true if turbo (boost) OPP
- * @suspend:	true if suspend OPP
- * @rate:	Frequency in hertz
- * @supplies:	Power supplies voltage/current values
- * @clock_latency_ns: Latency (in nanoseconds) of switching to this OPP's
- *		frequency from any other OPP's frequency.
- * @opp_table:	points back to the opp_table struct this opp belongs to
- * @np:		OPP's device node.
- * @dentry:	debugfs dentry pointer (per opp)
- *
- * This structure stores the OPP information for a given device.
- */
-struct dev_pm_opp {
-	struct list_head node;
-	struct kref kref;
-
-	bool available;
-	bool dynamic;
-	bool turbo;
-	bool suspend;
-	unsigned long rate;
-
-	struct dev_pm_opp_supply *supplies;
-
-	unsigned long clock_latency_ns;
-
-	struct opp_table *opp_table;
-
-	struct device_node *np;
-
-#ifdef CONFIG_DEBUG_FS
-	struct dentry *dentry;
-#endif
-};
-
-/**
  * struct opp_device - devices managed by 'struct opp_table'
  * @node:	list node
  * @dev:	device to which the struct object belongs
