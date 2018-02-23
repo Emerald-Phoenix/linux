@@ -227,6 +227,12 @@ config CPUFREQ_DT_PLATDEV
 
 	  If in doubt, say N.
 
+config CPU_VOLTAGE_TABLE
+	bool "Enable CPU voltage control via sysfs"
+	default n
+	help
+	  This adds a sysfs entry for editing the voltage table.
+	  
 if X86
 source "drivers/cpufreq/Kconfig.x86"
 endif
